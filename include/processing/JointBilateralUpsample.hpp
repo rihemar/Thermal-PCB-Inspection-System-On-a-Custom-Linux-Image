@@ -62,6 +62,15 @@ static cv::Mat OverlayEdges(const cv::Mat& colorizedHeatmap,
                              int cannyLow = 50,
                              int cannyHigh = 150,
                              cv::Scalar edgeColor = cv::Scalar(255, 255, 255));
-private:
+
+static void Filter3D(const cv::Mat& input, const cv::Mat& guide, cv::Mat& output,
+                                     int windowSize, float sigmaSpectral, double sigmaSpatial);
+static cv::Mat PrepareGuide3D(const cv::Mat& rgbFrame, GuideMode mode);
+static cv::Mat Upsample3D(const cv::Mat& thermalLowRes, const cv::Mat& rgbGuideAligned,
+     GuideMode mode,int windowSize, float sigmaSpectral, double sigmaSpatial);
+static cv::Mat EnhanceGradientContrast(const cv::Mat& thermalHR,
+                                        float gain = 1.5f,
+                                        int blurKernel = 5);
+     private:
     static cv::Mat CreateGaussianKernel(int windowSize, double sigma);
 };

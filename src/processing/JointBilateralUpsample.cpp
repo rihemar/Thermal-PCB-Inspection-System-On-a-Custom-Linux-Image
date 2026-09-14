@@ -180,3 +180,138 @@ cv::Mat JointBilateralUpsample::OverlayEdges(const cv::Mat& colorizedHeatmap,
 
     return result; // CV_8UC3 BGR
 }
+
+
+//3D
+
+cv::Mat JointBilateralUpsample::PrepareGuide3D(const cv::Mat& rgbFrame, GuideMode mode) {
+    cv::Mat guide;
+
+    if (mode == GuideMode::RAW) {
+        // Preserve full color info instead of collapsing to luminance
+        if (rgbFrame.channels() == 3) {
+            rgbFrame.convertTo(guide, CV_32FC3, 1.0 / 255.0);
+        } else {
+            cv::Mat bgr;
+            cv::cvtColor(rgbFrame, bgr, cv::COLOR_GRAY2BGR);
+            bgr.convertTo(guide, CV_32FC3, 1.0 / 255.0);
+        }
+        return guide;
+    }
+
+    // SOBEL / CANNY still need grayscale as their input
+    cv::Mat gray;
+    if (rgbFrame.channels() == 3) {
+        cv::cvtColor(rgbFrame, gray, cv::COLOR_BGR2GRAY);
+    } else {
+        gray = rgbFrame;
+    }
+
+    switch (mode) {
+        case GuideMode::SOBEL: { /* unchanged */ }
+        case GuideMode::CANNY: { /* unchanged */ }
+        default: break;
+    }
+    return guide;
+}
+
+void JointBilateralUpsample::Filter3D(const cv::Mat& input, const cv::Mat& guide, cv::Mat& output,
+                                     int windowSize, float sigmaSpectral, double sigmaSpatial) {
+    CV_Assert(input.size() == guide.size());
+    output.create(input.size(), CV_32F);
+
+    cv::Mat kernel = CreateGaussianKernel(windowSize, sigmaSpatial);
+    int half = windowSize / 2;
+    float twoSigmaSq = 2.f * sigmaSpectral * sigmaSpectral;
+    int guideChannels = guide.channels();
+
+    for (int r = 0; r < input.rows; ++r) {
+        for (int c = 0; c < input.cols; ++c) {
+            float sumW = 0.f, sum = 0.f;
+            const float* centerPtr = guide.ptr<float>(r) + c * guideChannels;
+
+            for (int i = -half; i <= half; ++i) {
+                int rr = cv::borderInterpolate(r + i, input.rows, cv::BORDER_REFLECT101);
+                for (int j = -half; j <= half; ++j) {
+                    int cc = cv::borderInterpolate(c + j, input.cols, cv::BORDER_REFLECT101);
+
+                    const float* nbPtr = guide.ptr<float>(rr) + cc * guideChannels;
+
+                    float rangeDistSq = 0.f;
+                    for (int k = 0; k < guideChannels; ++k) {
+                        float d = nbPtr[k] - centerPtr[k];
+                        rangeDistSq += d * d;
+                    }
+
+                    float w = std::exp(-rangeDistSq / twoSigmaSq)
+                            * kernel.at<float>(i + half, j + half);
+
+                    sum  += input.at<float>(rr, cc) * w;
+                    sumW += w;
+                }
+            }
+            output.at<float>(r, c) = (sumW > 1e-8f) ? (sum / sumW) : input.at<float>(r, c);
+        }
+    }
+}
+
+
+cv::Mat JointBilateralUpsample::Upsample3D(const cv::Mat& thermalLowRes, const cv::Mat& rgbGuideAligned,
+                                          GuideMode mode,
+                                          int windowSize, float sigmaSpectral, double sigmaSpatial) {
+    CV_Assert(thermalLowRes.type() == CV_32F);
+
+    cv::Mat guideFull = PrepareGuide3D(rgbGuideAligned, mode);
+
+    double factor = static_cast<double>(guideFull.rows) / thermalLowRes.rows;
+    int steps = std::max(1, static_cast<int>(std::round(std::log2(factor))));
+
+    cv::Mat D = thermalLowRes.clone();
+    for (int s = 1; s < steps; ++s) {
+        cv::resize(D, D, D.size() * 2, 0, 0, cv::INTER_LINEAR);
+
+        cv::Mat guideDown;
+        cv::resize(guideFull, guideDown, D.size(), 0, 0, cv::INTER_AREA);
+
+        cv::Mat filtered;
+        Filter3D(D, guideDown, filtered, windowSize, sigmaSpectral, sigmaSpatial);
+        D = filtered;
+    }
+
+    // Final step: bring D to the guide's exact resolution and do one more
+    // joint bilateral pass against the full-resolution guide.
+    cv::resize(D, D, guideFull.size(), 0, 0, cv::INTER_LINEAR);
+    cv::Mat result;
+    Filter(D, guideFull, result, windowSize, sigmaSpectral, sigmaSpatial);
+    return result;
+}
+
+
+cv::Mat JointBilateralUpsample::EnhanceGradientContrast(const cv::Mat& thermalHR,
+                                                         float gain,
+                                                         int blurKernel) {
+    CV_Assert(thermalHR.type() == CV_32F);
+
+    // 1. Compute gradient magnitude |∇T|
+    cv::Mat gradX, gradY, gradMag;
+    cv::Sobel(thermalHR, gradX, CV_32F, 1, 0, 3);
+    cv::Sobel(thermalHR, gradY, CV_32F, 0, 1, 3);
+    cv::magnitude(gradX, gradY, gradMag);
+
+    // 2. Normalize gradient magnitude to [0, 1] as a per-pixel enhancement mask
+    cv::Mat gradNorm;
+    cv::normalize(gradMag, gradNorm, 0.0, 1.0, cv::NORM_MINMAX, CV_32F);
+
+    // 3. Local mean via blur — used as the pivot for the contrast push.
+    //    This is the "unsharp mask" trick: local detail = original - local mean.
+    cv::Mat localMean;
+    cv::GaussianBlur(thermalHR, localMean, cv::Size(blurKernel, blurKernel), 0);
+
+    cv::Mat detail = thermalHR - localMean;
+
+    // 4. Push detail outward proportionally to local gradient strength,
+    //    so flat regions stay untouched and edges get sharpened.
+    cv::Mat boosted = localMean + detail.mul(1.0f + gain * gradNorm);
+
+    return boosted; // still CV_32F, same units as input (e.g. °C)
+}

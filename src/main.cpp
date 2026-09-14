@@ -104,8 +104,20 @@ int test() {
 }
 
 int main(){
-    cv::Mat frame = cv::imread("./pictures/raspberrypi.jpg");
-    generateFakeHeatmapFromImage generatorr;
+    auto camera = std::make_unique<RecordedRGB>();
+    if (!camera->initialize()) {
+        return -1; // no leak — camera cleans itself up automatically
+    }
+    cv::Mat frame;
+
+    while(camera->captureFrame(frame) ){
+    // cv::Mat frame = cv::imread("./pictures/raspberrypi.jpg");
+    generateFakeHeatmapFromImage generatorr(/* rgbHFovDeg =*/ 55.0,
+                              /*thermalHFovDeg =*/ 55.0,
+                              /*thermalRes =*/ cv::Size(16, 12),
+                              /*ambientTempC =*/ 25.0f,
+                              /*maxHotspotTempC =*/ 85.0f,
+                              /*noiseStdDevC = */0.6);
     cv::Mat heatmapgen = generatorr.getHeatmap(frame);
     std::cout << "Heatmap size: " << heatmapgen.cols << "x" << heatmapgen.rows
               << ", type: " << heatmapgen.type() << std::endl;
@@ -117,22 +129,28 @@ int main(){
     cv::Mat colorized = generatorr.getColorizedHeatmap(heatmapgen, cv::Size(320, 240));
  
     cv::imwrite("fake_thermal_heatmap.png", colorized);
+    cv::imshow("fake_thermal_heatmap.png", colorized);
     // std::cout << "Wrote fake_thermal_heatmap.png" << std::endl;
-    cv::Mat enhanced = JointBilateralUpsample::Upsample(
+    cv::Mat enhanced = JointBilateralUpsample::Upsample3D(
             heatmapgen, frame,
             GuideMode::RAW,      // try GuideMode::RAW or GuideMode::CANNY too
-            /*windowSize=*/7, // original 5
+            /*windowSize=*/6, // original 5
             /*sigmaSpectral=*/0.05f, //original 0.15
             /*sigmaSpatial=*/8.0); // original 2.0
 
         double minV, maxV;
         cv::minMaxLoc(enhanced, &minV, &maxV);
+        // cv::Mat thermalEnhanced = JointBilateralUpsample::EnhanceGradientContrast(enhanced, /*gain=*/0.1f);
+
         // minV = minV - 20;
         cv::Mat enhancedDisplay = JointBilateralUpsample::Colorize(enhanced, minV, maxV);
-        cv::Mat withEdges = JointBilateralUpsample::OverlayEdges(enhancedDisplay, frame, 0.2);
+        cv::Mat withEdges = JointBilateralUpsample::OverlayEdges(enhancedDisplay, frame, 0.05);
+        cv::imshow("Thermal (RGB-guided enhanced).png", withEdges);
         cv::imwrite("Thermal (RGB-guided enhanced).png", withEdges);
+        if (cv::waitKey(1) == 27) break;
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-
+    }
         // Recorded thermal playback likely runs at a lower/fixed rate
         // than the RGB recording; keep pacing so the fusion step isn't
         // hammered faster than a real thermal sensor would produce frames.    }
