@@ -1,0 +1,5 @@
+.gitignore
+fake_thermal_heatmap.png
+./pictures/*
+./build/*
+

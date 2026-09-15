@@ -1,0 +1,74 @@
+[
+{
+  "directory": "/home/rihemar/FAC/Stage_LAB619/build",
+  "command": "/usr/bin/g++ -DDEVICE_UBUNTU -I/home/rihemar/FAC/Stage_LAB619/include/camera -I/home/rihemar/FAC/Stage_LAB619/include/thermalCam -I/home/rihemar/FAC/Stage_LAB619/include/processing -I/home/rihemar/FAC/Stage_LAB619/include/drivers -isystem /usr/include/opencv4 -g -std=gnu++17 -o CMakeFiles/main.dir/src/main.cpp.o -c /home/rihemar/FAC/Stage_LAB619/src/main.cpp",
+  "file": "/home/rihemar/FAC/Stage_LAB619/src/main.cpp",
+  "output": "CMakeFiles/main.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/rihemar/FAC/Stage_LAB619/build",
+  "command": "/usr/bin/g++ -DDEVICE_UBUNTU -I/home/rihemar/FAC/Stage_LAB619/include/camera -I/home/rihemar/FAC/Stage_LAB619/include/thermalCam -I/home/rihemar/FAC/Stage_LAB619/include/processing -I/home/rihemar/FAC/Stage_LAB619/include/drivers -isystem /usr/include/opencv4 -g -std=gnu++17 -o CMakeFiles/main.dir/src/camera/WebcamCamera.cpp.o -c /home/rihemar/FAC/Stage_LAB619/src/camera/WebcamCamera.cpp",
+  "file": "/home/rihemar/FAC/Stage_LAB619/src/camera/WebcamCamera.cpp",
+  "output": "CMakeFiles/main.dir/src/camera/WebcamCamera.cpp.o"
+},
+{
+  "directory": "/home/rihemar/FAC/Stage_LAB619/build",
+  "command": "/usr/bin/g++ -DDEVICE_UBUNTU -I/home/rihemar/FAC/Stage_LAB619/include/camera -I/home/rihemar/FAC/Stage_LAB619/include/thermalCam -I/home/rihemar/FAC/Stage_LAB619/include/processing -I/home/rihemar/FAC/Stage_LAB619/include/drivers -isystem /usr/include/opencv4 -g -std=gnu++17 -o CMakeFiles/main.dir/src/camera/RecordedRGB.cpp.o -c /home/rihemar/FAC/Stage_LAB619/src/camera/RecordedRGB.cpp",
+  "file": "/home/rihemar/FAC/Stage_LAB619/src/camera/RecordedRGB.cpp",
+  "output": "CMakeFiles/main.dir/src/camera/RecordedRGB.cpp.o"
+},
+{
+  "directory": "/home/rihemar/FAC/Stage_LAB619/build",
+  "command": "/usr/bin/g++ -DDEVICE_UBUNTU -I/home/rihemar/FAC/Stage_LAB619/include/camera -I/home/rihemar/FAC/Stage_LAB619/include/thermalCam -I/home/rihemar/FAC/Stage_LAB619/include/processing -I/home/rihemar/FAC/Stage_LAB619/include/drivers -isystem /usr/include/opencv4 -g -std=gnu++17 -o CMakeFiles/main.dir/src/thermalCam/fakeThermalCamera.cpp.o -c /home/rihemar/FAC/Stage_LAB619/src/thermalCam/fakeThermalCamera.cpp",
+  "file": "/home/rihemar/FAC/Stage_LAB619/src/thermalCam/fakeThermalCamera.cpp",
+  "output": "CMakeFiles/main.dir/src/thermalCam/fakeThermalCamera.cpp.o"
+},
+{
+  "directory": "/home/rihemar/FAC/Stage_LAB619/build",
+  "command": "/usr/bin/g++ -DDEVICE_UBUNTU -I/home/rihemar/FAC/Stage_LAB619/include/camera -I/home/rihemar/FAC/Stage_LAB619/include/thermalCam -I/home/rihemar/FAC/Stage_LAB619/include/processing -I/home/rihemar/FAC/Stage_LAB619/include/drivers -isystem /usr/include/opencv4 -g -std=gnu++17 -o CMakeFiles/main.dir/src/thermalCam/RecordedThermal.cpp.o -c /home/rihemar/FAC/Stage_LAB619/src/thermalCam/RecordedThermal.cpp",
+  "file": "/home/rihemar/FAC/Stage_LAB619/src/thermalCam/RecordedThermal.cpp",
+  "output": "CMakeFiles/main.dir/src/thermalCam/RecordedThermal.cpp.o"
+},
+{
+  "directory": "/home/rihemar/FAC/Stage_LAB619/build",
+  "command": "/usr/bin/g++ -DDEVICE_UBUNTU -I/home/rihemar/FAC/Stage_LAB619/include/camera -I/home/rihemar/FAC/Stage_LAB619/include/thermalCam -I/home/rihemar/FAC/Stage_LAB619/include/processing -I/home/rihemar/FAC/Stage_LAB619/include/drivers -isystem /usr/include/opencv4 -g -std=gnu++17 -o CMakeFiles/main.dir/src/thermalCam/generateFakeHeatmapFromImage.cpp.o -c /home/rihemar/FAC/Stage_LAB619/src/thermalCam/generateFakeHeatmapFromImage.cpp",
+  "file": "/home/rihemar/FAC/Stage_LAB619/src/thermalCam/generateFakeHeatmapFromImage.cpp",
+  "output": "CMakeFiles/main.dir/src/thermalCam/generateFakeHeatmapFromImage.cpp.o"
+},
+{
+  "directory": "/home/rihemar/FAC/Stage_LAB619/build",
+  "command": "/usr/bin/g++ -DDEVICE_UBUNTU -I/home/rihemar/FAC/Stage_LAB619/include/camera -I/home/rihemar/FAC/Stage_LAB619/include/thermalCam -I/home/rihemar/FAC/Stage_LAB619/include/processing -I/home/rihemar/FAC/Stage_LAB619/include/drivers -isystem /usr/include/opencv4 -g -std=gnu++17 -o CMakeFiles/main.dir/src/processing/HotspotDetector.cpp.o -c /home/rihemar/FAC/Stage_LAB619/src/processing/HotspotDetector.cpp",
+  "file": "/home/rihemar/FAC/Stage_LAB619/src/processing/HotspotDetector.cpp",
+  "output": "CMakeFiles/main.dir/src/processing/HotspotDetector.cpp.o"
+},
+{
+  "directory": "/home/rihemar/FAC/Stage_LAB619/build",
+  "command": "/usr/bin/g++ -DDEVICE_UBUNTU -I/home/rihemar/FAC/Stage_LAB619/include/camera -I/home/rihemar/FAC/Stage_LAB619/include/thermalCam -I/home/rihemar/FAC/Stage_LAB619/include/processing -I/home/rihemar/FAC/Stage_LAB619/include/drivers -isystem /usr/include/opencv4 -g -std=gnu++17 -o CMakeFiles/main.dir/src/processing/ChessboardCalibration.cpp.o -c /home/rihemar/FAC/Stage_LAB619/src/processing/ChessboardCalibration.cpp",
+  "file": "/home/rihemar/FAC/Stage_LAB619/src/processing/ChessboardCalibration.cpp",
+  "output": "CMakeFiles/main.dir/src/processing/ChessboardCalibration.cpp.o"
+},
+{
+  "directory": "/home/rihemar/FAC/Stage_LAB619/build",
+  "command": "/usr/bin/g++ -DDEVICE_UBUNTU -I/home/rihemar/FAC/Stage_LAB619/include/camera -I/home/rihemar/FAC/Stage_LAB619/include/thermalCam -I/home/rihemar/FAC/Stage_LAB619/include/processing -I/home/rihemar/FAC/Stage_LAB619/include/drivers -isystem /usr/include/opencv4 -g -std=gnu++17 -o CMakeFiles/main.dir/src/processing/PCBDetector.cpp.o -c /home/rihemar/FAC/Stage_LAB619/src/processing/PCBDetector.cpp",
+  "file": "/home/rihemar/FAC/Stage_LAB619/src/processing/PCBDetector.cpp",
+  "output": "CMakeFiles/main.dir/src/processing/PCBDetector.cpp.o"
+},
+{
+  "directory": "/home/rihemar/FAC/Stage_LAB619/build",
+  "command": "/usr/bin/g++ -DDEVICE_UBUNTU -I/home/rihemar/FAC/Stage_LAB619/include/camera -I/home/rihemar/FAC/Stage_LAB619/include/thermalCam -I/home/rihemar/FAC/Stage_LAB619/include/processing -I/home/rihemar/FAC/Stage_LAB619/include/drivers -isystem /usr/include/opencv4 -g -std=gnu++17 -o CMakeFiles/main.dir/src/processing/Registration.cpp.o -c /home/rihemar/FAC/Stage_LAB619/src/processing/Registration.cpp",
+  "file": "/home/rihemar/FAC/Stage_LAB619/src/processing/Registration.cpp",
+  "output": "CMakeFiles/main.dir/src/processing/Registration.cpp.o"
+},
+{
+  "directory": "/home/rihemar/FAC/Stage_LAB619/build",
+  "command": "/usr/bin/g++ -DDEVICE_UBUNTU -I/home/rihemar/FAC/Stage_LAB619/include/camera -I/home/rihemar/FAC/Stage_LAB619/include/thermalCam -I/home/rihemar/FAC/Stage_LAB619/include/processing -I/home/rihemar/FAC/Stage_LAB619/include/drivers -isystem /usr/include/opencv4 -g -std=gnu++17 -o CMakeFiles/main.dir/src/processing/JointBilateralUpsample.cpp.o -c /home/rihemar/FAC/Stage_LAB619/src/processing/JointBilateralUpsample.cpp",
+  "file": "/home/rihemar/FAC/Stage_LAB619/src/processing/JointBilateralUpsample.cpp",
+  "output": "CMakeFiles/main.dir/src/processing/JointBilateralUpsample.cpp.o"
+},
+{
+  "directory": "/home/rihemar/FAC/Stage_LAB619/build",
+  "command": "/usr/bin/g++ -DDEVICE_UBUNTU -I/home/rihemar/FAC/Stage_LAB619/include/camera -I/home/rihemar/FAC/Stage_LAB619/include/thermalCam -I/home/rihemar/FAC/Stage_LAB619/include/processing -I/home/rihemar/FAC/Stage_LAB619/include/drivers -isystem /usr/include/opencv4 -g -std=gnu++17 -o CMakeFiles/main.dir/src/camera/IPWebcamCamera.cpp.o -c /home/rihemar/FAC/Stage_LAB619/src/camera/IPWebcamCamera.cpp",
+  "file": "/home/rihemar/FAC/Stage_LAB619/src/camera/IPWebcamCamera.cpp",
+  "output": "CMakeFiles/main.dir/src/camera/IPWebcamCamera.cpp.o"
+}
+]

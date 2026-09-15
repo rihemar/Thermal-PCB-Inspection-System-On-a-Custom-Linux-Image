@@ -12,8 +12,7 @@ cv::Mat Registration::ComputeHomography(const std::vector<cv::Point2f>& rgbPoint
     cv::Mat H = cv::findHomography(rgbPoints, thermalPoints, cv::RANSAC);
     return H;
 }
-
-cv::Mat Registration::AlignToThermal(const cv::Mat& rgbFrame,
+ cv::Mat Registration::AlignToThermal(const cv::Mat& rgbFrame,
                                       const cv::Mat& homography,
                                       const cv::Size& outputSize) {
     if (homography.empty()) {

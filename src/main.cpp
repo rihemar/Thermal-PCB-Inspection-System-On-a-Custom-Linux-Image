@@ -11,6 +11,7 @@
 #include "RecordedRGB.hpp"
 #include "RecordedThermal.hpp"
 #include "generateFakeHeatmapFromImage.hpp"
+#include "ChessboardCalibration.hpp"
 #include <thread>
 #include <chrono>
 #include <memory>
@@ -103,7 +104,7 @@ int test() {
     return 0;
 }
 
-int main(){
+int BilateralJointUpsampletest(){
     auto camera = std::make_unique<RecordedRGB>();
     if (!camera->initialize()) {
         return -1; // no leak — camera cleans itself up automatically
@@ -156,4 +157,116 @@ int main(){
         // hammered faster than a real thermal sensor would produce frames.    }
         return 1;
  
+}
+
+
+int chessboard(){
+    std::string chess1 = "./pictures/chess7.png";
+    std::string chess2 = "./pictures/chess8.jpg";
+    cv::Mat rgbImage = cv::imread(chess1, cv::IMREAD_COLOR);
+    cv::Mat thermalImage = cv::imread(chess2, cv::IMREAD_ANYDEPTH | cv::IMREAD_ANYCOLOR);
+
+    if (rgbImage.empty() || thermalImage.empty()) {
+        std::cerr << "Failed to load images.\n";
+        return 1;
+    }
+
+    cv::Size boardSize(10, 7);
+    ChessboardCalibration calib(boardSize);
+
+    auto pair = calib.DetectPair(rgbImage, thermalImage);
+    if (!pair.success) {
+        std::cerr << "Chessboard detection failed.\n";
+        return 1;
+    }
+
+    cv::Mat H = ChessboardCalibration::ComputeHomography(pair);
+    if (H.empty()) {
+        std::cerr << "Homography computation failed.\n";
+        return 1;
+    }
+
+    double meanErr = ChessboardCalibration::ComputeMeanReprojectionError(H,pair);
+
+    std::cout << "H =\n" << H << "\n";
+    std::cout << "Mean reprojection error: " << meanErr << " px\n";
+    
+    ChessboardCalibration::SaveHomography("homography.yml", H);
+    cv::Mat output = Registration::AlignToThermal(thermalImage,H,cv::Size(320, 240));
+    cv::imwrite("output.png", output);
+    return 0;
+
+}
+
+
+int chess2(){
+    std::string chess1 = "./pictures/chess7.png";
+    std::string chess2 = "./pictures/chess7.png";
+    cv::Mat rgbImage = cv::imread(chess1, cv::IMREAD_COLOR);
+    cv::Mat thermalImage = cv::imread(chess2, cv::IMREAD_ANYDEPTH | cv::IMREAD_ANYCOLOR);
+
+    if (rgbImage.empty() || thermalImage.empty()) {
+        std::cerr << "Failed to load images.\n";
+        return 1;
+    }
+
+    cv::Size boardSize(9, 6);
+    ChessboardCalibration calib(boardSize);
+
+    auto pair = calib.DetectPair(rgbImage, thermalImage);
+    if (!pair.success) {
+        std::cerr << "Chessboard detection failed.\n";
+        return 1;
+    }
+
+    cv::Mat H = ChessboardCalibration::ComputeHomography(pair);
+    if (H.empty()) {
+        std::cerr << "Homography computation failed.\n";
+        return 1;
+    }
+
+    double meanErr = ChessboardCalibration::ComputeMeanReprojectionError(H, pair);
+
+    std::cout << "H =\n" << H << "\n";
+    std::cout << "Mean reprojection error: " << meanErr << " px\n";
+
+    ChessboardCalibration::SaveHomography("homography.yml", H);
+
+    cv::Mat rgbCornersVis = rgbImage.clone();
+    cv::drawChessboardCorners(rgbCornersVis, boardSize, pair.rgbCorners, true);
+    cv::imwrite("rgb_corners.png", rgbCornersVis);
+
+    cv::Mat thermalGray8u;
+    if (thermalImage.type() == CV_32F || thermalImage.type() == CV_64F) {
+        cv::normalize(thermalImage, thermalGray8u, 0, 255, cv::NORM_MINMAX, CV_8U);
+    } else if (thermalImage.channels() == 3) {
+        cv::cvtColor(thermalImage, thermalGray8u, cv::COLOR_BGR2GRAY);
+    } else {
+        thermalGray8u = thermalImage;
+    }
+    cv::Mat thermalCornersVis;
+    cv::cvtColor(thermalGray8u, thermalCornersVis, cv::COLOR_GRAY2BGR);
+    cv::drawChessboardCorners(thermalCornersVis, boardSize, pair.thermalCorners, true);
+    cv::imwrite("thermal_corners.png", thermalCornersVis);
+
+    cv::Mat thermalColor;
+    cv::applyColorMap(thermalGray8u, thermalColor, cv::COLORMAP_JET);
+
+    cv::Mat thermalWarped;
+    cv::warpPerspective(thermalColor, thermalWarped, H, rgbImage.size());
+
+    double alpha = 0.35;
+    cv::Mat overlay;
+    cv::addWeighted(rgbImage, 1.0 - alpha, thermalWarped, alpha, 0.0, overlay);
+    cv::imwrite("overlay.png", overlay);
+
+    std::cout << "Saved rgb_corners.png, thermal_corners.png, overlay.png\n";
+
+    return 0;
+
+}
+
+int main(){
+    chess2();
+    return 1;
 }
