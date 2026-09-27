@@ -72,19 +72,19 @@ include CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/codegen:
 .PHONY : CMakeFiles/main.dir/codegen
 
-CMakeFiles/main.dir/src/main.cpp.o: CMakeFiles/main.dir/flags.make
-CMakeFiles/main.dir/src/main.cpp.o: /home/rihemar/FAC/Stage_LAB619/src/main.cpp
-CMakeFiles/main.dir/src/main.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/rihemar/FAC/Stage_LAB619/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/src/main.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/main.cpp.o -MF CMakeFiles/main.dir/src/main.cpp.o.d -o CMakeFiles/main.dir/src/main.cpp.o -c /home/rihemar/FAC/Stage_LAB619/src/main.cpp
+CMakeFiles/main.dir/src/GUI.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/GUI.cpp.o: /home/rihemar/FAC/Stage_LAB619/src/GUI.cpp
+CMakeFiles/main.dir/src/GUI.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/rihemar/FAC/Stage_LAB619/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/src/GUI.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/GUI.cpp.o -MF CMakeFiles/main.dir/src/GUI.cpp.o.d -o CMakeFiles/main.dir/src/GUI.cpp.o -c /home/rihemar/FAC/Stage_LAB619/src/GUI.cpp
 
-CMakeFiles/main.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/src/main.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rihemar/FAC/Stage_LAB619/src/main.cpp > CMakeFiles/main.dir/src/main.cpp.i
+CMakeFiles/main.dir/src/GUI.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/src/GUI.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rihemar/FAC/Stage_LAB619/src/GUI.cpp > CMakeFiles/main.dir/src/GUI.cpp.i
 
-CMakeFiles/main.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/main.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rihemar/FAC/Stage_LAB619/src/main.cpp -o CMakeFiles/main.dir/src/main.cpp.s
+CMakeFiles/main.dir/src/GUI.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/GUI.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rihemar/FAC/Stage_LAB619/src/GUI.cpp -o CMakeFiles/main.dir/src/GUI.cpp.s
 
 CMakeFiles/main.dir/src/camera/WebcamCamera.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/camera/WebcamCamera.cpp.o: /home/rihemar/FAC/Stage_LAB619/src/camera/WebcamCamera.cpp
@@ -240,9 +240,23 @@ CMakeFiles/main.dir/src/camera/IPWebcamCamera.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/camera/IPWebcamCamera.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rihemar/FAC/Stage_LAB619/src/camera/IPWebcamCamera.cpp -o CMakeFiles/main.dir/src/camera/IPWebcamCamera.cpp.s
 
+CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.o: /home/rihemar/FAC/Stage_LAB619/src/thermalCam/ThermalCamera.cpp
+CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/rihemar/FAC/Stage_LAB619/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.o -MF CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.o.d -o CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.o -c /home/rihemar/FAC/Stage_LAB619/src/thermalCam/ThermalCamera.cpp
+
+CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rihemar/FAC/Stage_LAB619/src/thermalCam/ThermalCamera.cpp > CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.i
+
+CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rihemar/FAC/Stage_LAB619/src/thermalCam/ThermalCamera.cpp -o CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.s
+
 # Object files for target main
 main_OBJECTS = \
-"CMakeFiles/main.dir/src/main.cpp.o" \
+"CMakeFiles/main.dir/src/GUI.cpp.o" \
 "CMakeFiles/main.dir/src/camera/WebcamCamera.cpp.o" \
 "CMakeFiles/main.dir/src/camera/RecordedRGB.cpp.o" \
 "CMakeFiles/main.dir/src/thermalCam/fakeThermalCamera.cpp.o" \
@@ -253,12 +267,13 @@ main_OBJECTS = \
 "CMakeFiles/main.dir/src/processing/PCBDetector.cpp.o" \
 "CMakeFiles/main.dir/src/processing/Registration.cpp.o" \
 "CMakeFiles/main.dir/src/processing/JointBilateralUpsample.cpp.o" \
-"CMakeFiles/main.dir/src/camera/IPWebcamCamera.cpp.o"
+"CMakeFiles/main.dir/src/camera/IPWebcamCamera.cpp.o" \
+"CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.o"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
 
-main: CMakeFiles/main.dir/src/main.cpp.o
+main: CMakeFiles/main.dir/src/GUI.cpp.o
 main: CMakeFiles/main.dir/src/camera/WebcamCamera.cpp.o
 main: CMakeFiles/main.dir/src/camera/RecordedRGB.cpp.o
 main: CMakeFiles/main.dir/src/thermalCam/fakeThermalCamera.cpp.o
@@ -270,6 +285,7 @@ main: CMakeFiles/main.dir/src/processing/PCBDetector.cpp.o
 main: CMakeFiles/main.dir/src/processing/Registration.cpp.o
 main: CMakeFiles/main.dir/src/processing/JointBilateralUpsample.cpp.o
 main: CMakeFiles/main.dir/src/camera/IPWebcamCamera.cpp.o
+main: CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.o
 main: CMakeFiles/main.dir/build.make
 main: CMakeFiles/main.dir/compiler_depend.ts
 main: /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.4.10.0
@@ -328,7 +344,7 @@ main: /usr/lib/x86_64-linux-gnu/libopencv_photo.so.4.10.0
 main: /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.4.10.0
 main: /usr/lib/x86_64-linux-gnu/libopencv_core.so.4.10.0
 main: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/rihemar/FAC/Stage_LAB619/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/rihemar/FAC/Stage_LAB619/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

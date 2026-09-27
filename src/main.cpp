@@ -16,93 +16,94 @@
 #include <chrono>
 #include <memory>
 #include <iostream>
+#include <fstream>
 
-int test() {
-    // --- recorded sources instead of live cameras, so the pipeline can
-    // be tested deterministically without hardware attached ---
-    auto camera = std::make_unique<RecordedRGB>();
-    if (!camera->initialize()) {
-        return -1; // no leak — camera cleans itself up automatically
-    }
+// int test() {
+//     // --- recorded sources instead of live cameras, so the pipeline can
+//     // be tested deterministically without hardware attached ---
+//     auto camera = std::make_unique<RecordedRGB>();
+//     if (!camera->initialize()) {
+//         return -1; // no leak — camera cleans itself up automatically
+//     }
 
-    auto thermalCamera = std::make_unique<RecordedThermal>();
-    if (!thermalCamera->initialize()) {
-        return -1;
-    }
+//     auto thermalCamera = std::make_unique<RecordedThermal>();
+//     if (!thermalCamera->initialize()) {
+//         return -1;
+//     }
 
-    // --- detectors ---
-    PCBDetector pcbDetector;
-    HotspotDetector hotspotDetector;
+//     // --- detectors ---
+//     PCBDetector pcbDetector;
+//     HotspotDetector hotspotDetector;
 
-    // --- registration: load once before the loop, not per frame ---
-    cv::Mat homography = Registration::LoadHomography("rgb_to_thermal_homography.yml");
-    bool useHomography = !homography.empty();
-    // TODO: measure this ROI (in RGB pixel coords) for your actual rig
-    // if you haven't run homography calibration yet.
-    cv::Rect fallbackRoi(80, 40, 480, 360);
+//     // --- registration: load once before the loop, not per frame ---
+//     cv::Mat homography = Registration::LoadHomography("rgb_to_thermal_homography.yml");
+//     bool useHomography = !homography.empty();
+//     // TODO: measure this ROI (in RGB pixel coords) for your actual rig
+//     // if you haven't run homography calibration yet.
+//     cv::Rect fallbackRoi(80, 40, 480, 360);
 
-    cv::Mat rgbFrame, thermalFrame;
-    std::vector<cv::Point> pcbContour;
+//     cv::Mat rgbFrame, thermalFrame;
+//     std::vector<cv::Point> pcbContour;
 
-    while (camera->captureFrame(rgbFrame) && thermalCamera->captureFrame(thermalFrame)) {
+//     while (camera->captureFrame(rgbFrame) && thermalCamera->captureFrame(thermalFrame)) {
 
-        // --- PCB detection on the recorded RGB stream ---
-        pcbContour = pcbDetector.DetectPCB(rgbFrame);
-        if (!pcbContour.empty()) {
-            cv::polylines(rgbFrame, pcbContour, true, cv::Scalar(0, 255, 0), 2);
-        }
-        utils::show("PCB Detection", rgbFrame);
+//         // --- PCB detection on the recorded RGB stream ---
+//         pcbContour = pcbDetector.DetectPCB(rgbFrame);
+//         if (!pcbContour.empty()) {
+//             cv::polylines(rgbFrame, pcbContour, true, cv::Scalar(0, 255, 0), 2);
+//         }
+//         utils::show("PCB Detection", rgbFrame);
 
-        // --- hotspot detection on the recorded thermal stream ---
-        cv::Mat thermalDisplay = thermalCamera->displayFrame();
-        std::vector<Hotspot> hotspots = hotspotDetector.DetectThreshold(thermalFrame, 55);
-        std::cout << hotspots.size() << " points above threshold:" << std::endl;
+//         // --- hotspot detection on the recorded thermal stream ---
+//         cv::Mat thermalDisplay = thermalCamera->displayFrame();
+//         // std::vector<Hotspot> hotspots = hotspotDetector.DetectThreshold(thermalFrame, 55);
+//         std::cout << hotspots.size() << " points above threshold:" << std::endl;
 
-        for (const Hotspot& h : hotspots) {
-            cv::Point2f pf = thermalCamera->ScaleCoordinates(h.position);
-            cv::Point displayPt(cvRound(pf.x), cvRound(pf.y));
-            cv::circle(thermalDisplay, displayPt, 4, cv::Scalar(255, 255, 255), -1);
-            cv::putText(thermalDisplay, std::to_string(h.temperature),
-                        displayPt + cv::Point(10, 0), cv::FONT_HERSHEY_SIMPLEX,
-                        0.5, cv::Scalar(255, 255, 255), 1);
-        }
-        cv::imshow("Thermal (raw)", thermalDisplay);
+//         for (const Hotspot& h : hotspots) {
+//             cv::Point2f pf = thermalCamera->ScaleCoordinates(h.position);
+//             cv::Point displayPt(cvRound(pf.x), cvRound(pf.y));
+//             cv::circle(thermalDisplay, displayPt, 4, cv::Scalar(255, 255, 255), -1);
+//             cv::putText(thermalDisplay, std::to_string(h.temperature),
+//                         displayPt + cv::Point(10, 0), cv::FONT_HERSHEY_SIMPLEX,
+//                         0.5, cv::Scalar(255, 255, 255), 1);
+//         }
+//         cv::imshow("Thermal (raw)", thermalDisplay);
 
-        // --- RGB-guided thermal fusion / upsampling ---
-        cv::Size targetSize = rgbFrame.size(); // enhance thermal up to RGB resolution
-        cv::Mat alignedGuide = useHomography
-            ? Registration::AlignToThermal(rgbFrame, homography, targetSize)
-            : Registration::AlignByCropScale(rgbFrame, fallbackRoi, targetSize);
+//         // --- RGB-guided thermal fusion / upsampling ---
+//         cv::Size targetSize = rgbFrame.size(); // enhance thermal up to RGB resolution
+//         cv::Mat alignedGuide = useHomography
+//             ? Registration::AlignToThermal(rgbFrame, homography, targetSize)
+//             : Registration::AlignByCropScale(rgbFrame, fallbackRoi, targetSize);
 
-        cv::Mat thermalFloat;
-        if (thermalFrame.type() != CV_32F) {
-            thermalFrame.convertTo(thermalFloat, CV_32F);
-        } else {
-            thermalFloat = thermalFrame;
-        }
+//         cv::Mat thermalFloat;
+//         if (thermalFrame.type() != CV_32F) {
+//             thermalFrame.convertTo(thermalFloat, CV_32F);
+//         } else {
+//             thermalFloat = thermalFrame;
+//         }
 
-        cv::Mat enhanced = JointBilateralUpsample::Upsample(
-            thermalFloat, alignedGuide,
-            GuideMode::SOBEL,      // try GuideMode::RAW or GuideMode::CANNY too
-            /*windowSize=*/5,
-            /*sigmaSpectral=*/0.15f,
-            /*sigmaSpatial=*/2.0);
+//         cv::Mat enhanced = JointBilateralUpsample::Upsample(
+//             thermalFloat, alignedGuide,
+//             GuideMode::RAW,      // try GuideMode::RAW or GuideMode::CANNY too
+//             /*windowSize=*/5, // original 5
+//             /*sigmaSpectral=*/0.05f, //original 0.15
+//             /*sigmaSpatial=*/8.0); // original 2.0
 
-        double minV, maxV;
-        cv::minMaxLoc(enhanced, &minV, &maxV);
-        cv::Mat enhancedDisplay = JointBilateralUpsample::Colorize(enhanced, minV, maxV);
-        cv::imshow("Thermal (RGB-guided enhanced)", enhancedDisplay);
+//         double minV, maxV;
+//         cv::minMaxLoc(enhanced, &minV, &maxV);
+//         cv::Mat enhancedDisplay = JointBilateralUpsample::Colorize(enhanced, minV, maxV);
+//         cv::imshow("Thermal (RGB-guided enhanced)", enhancedDisplay);
 
-        if (cv::waitKey(1) == 27) break;
+//         if (cv::waitKey(1) == 27) break;
 
-        // Recorded thermal playback likely runs at a lower/fixed rate
-        // than the RGB recording; keep pacing so the fusion step isn't
-        // hammered faster than a real thermal sensor would produce frames.
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-    }
+//         // Recorded thermal playback likely runs at a lower/fixed rate
+//         // than the RGB recording; keep pacing so the fusion step isn't
+//         // hammered faster than a real thermal sensor would produce frames.
+//         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+//     }
 
-    return 0;
-}
+//     return 0;
+// }
 
 int BilateralJointUpsampletest(){
     auto camera = std::make_unique<RecordedRGB>();
@@ -138,13 +139,29 @@ int BilateralJointUpsampletest(){
             /*windowSize=*/6, // original 5
             /*sigmaSpectral=*/0.05f, //original 0.15
             /*sigmaSpatial=*/8.0); // original 2.0
-
+        //DEBUG
+        std::ofstream file("matrixValueEnhanced.txt");
+        file << cv::format(enhanced, cv::Formatter::FMT_CSV);
+        file.close();
         double minV, maxV;
         cv::minMaxLoc(enhanced, &minV, &maxV);
         // cv::Mat thermalEnhanced = JointBilateralUpsample::EnhanceGradientContrast(enhanced, /*gain=*/0.1f);
 
         // minV = minV - 20;
         cv::Mat enhancedDisplay = JointBilateralUpsample::Colorize(enhanced, minV, maxV);
+        HotRegion region = HotspotDetector::DetectThreshold(enhanced,84.0f);
+        cv::rectangle(enhancedDisplay, region.boundingBox, cv::Scalar(0, 255, 0), 2);
+        cv::circle(enhancedDisplay, region.peakPosition, 4, cv::Scalar(255, 255, 255), -1);
+        cv::putText(enhancedDisplay, cv::format("%.1f", region.peakTemperature),
+                region.peakPosition + cv::Point(8, -8), cv::FONT_HERSHEY_SIMPLEX,
+                0.5, cv::Scalar(255, 255, 255), 1);
+        Hotspot hotspot = HotspotDetector::DetectAbsolute(enhanced);
+        cv::circle(enhancedDisplay, hotspot.position, 6, cv::Scalar(0, 0, 255), -1);
+        cv::putText(enhancedDisplay, cv::format("%.1f", hotspot.temperature),
+                hotspot.position + cv::Point(8, -8), cv::FONT_HERSHEY_SIMPLEX,
+                1, cv::Scalar(0, 0, 255), 1);
+
+        cv::imwrite("enhancedThermalOutput.png",enhancedDisplay);
         cv::Mat withEdges = JointBilateralUpsample::OverlayEdges(enhancedDisplay, frame, 0.05);
         cv::imshow("Thermal (RGB-guided enhanced).png", withEdges);
         cv::imwrite("Thermal (RGB-guided enhanced).png", withEdges);
@@ -267,6 +284,8 @@ int chess2(){
 }
 
 int main(){
-    chess2();
+    // chess2();
+    BilateralJointUpsampletest();
+    // test();
     return 1;
 }

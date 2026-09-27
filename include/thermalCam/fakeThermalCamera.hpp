@@ -5,14 +5,7 @@
 #include <random>
 #include <opencv2/opencv.hpp>
 #include "ITCamera.hpp"
-
-
-struct ThermalFrame {
-    std::vector<float> temperatures;
-    int width;
-    int height;
-    uint64_t timestamp;
-};
+#include "ThermalCamera.hpp"
 
 
 class fakeThermalCamera : public ITCamera {

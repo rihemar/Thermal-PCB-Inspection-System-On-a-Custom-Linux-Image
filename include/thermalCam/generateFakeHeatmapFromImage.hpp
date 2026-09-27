@@ -57,7 +57,7 @@ public:
     // colorized, upscaled cv::Mat (CV_8UC3, BGR) for display/debugging.
     cv::Mat getColorizedHeatmap(const cv::Mat& rawHeatmapC,
                                  cv::Size displaySize = cv::Size(320, 240),
-                                 int colormap = cv::COLORMAP_JET,
+                                 int colormap = cv::COLORMAP_INFERNO,
                                  int interpolation = cv::INTER_CUBIC) const;
 
     // Accessors / tuning knobs

@@ -129,6 +129,30 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
+src/GUI.o: src/GUI.cpp.o
+.PHONY : src/GUI.o
+
+# target to build an object file
+src/GUI.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GUI.cpp.o
+.PHONY : src/GUI.cpp.o
+
+src/GUI.i: src/GUI.cpp.i
+.PHONY : src/GUI.i
+
+# target to preprocess a source file
+src/GUI.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GUI.cpp.i
+.PHONY : src/GUI.cpp.i
+
+src/GUI.s: src/GUI.cpp.s
+.PHONY : src/GUI.s
+
+# target to generate assembly for a file
+src/GUI.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GUI.cpp.s
+.PHONY : src/GUI.cpp.s
+
 src/camera/IPWebcamCamera.o: src/camera/IPWebcamCamera.cpp.o
 .PHONY : src/camera/IPWebcamCamera.o
 
@@ -200,30 +224,6 @@ src/camera/WebcamCamera.s: src/camera/WebcamCamera.cpp.s
 src/camera/WebcamCamera.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/camera/WebcamCamera.cpp.s
 .PHONY : src/camera/WebcamCamera.cpp.s
-
-src/main.o: src/main.cpp.o
-.PHONY : src/main.o
-
-# target to build an object file
-src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/main.cpp.o
-.PHONY : src/main.cpp.o
-
-src/main.i: src/main.cpp.i
-.PHONY : src/main.i
-
-# target to preprocess a source file
-src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
-
-src/main.s: src/main.cpp.s
-.PHONY : src/main.s
-
-# target to generate assembly for a file
-src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
 
 src/processing/ChessboardCalibration.o: src/processing/ChessboardCalibration.cpp.o
 .PHONY : src/processing/ChessboardCalibration.o
@@ -369,6 +369,30 @@ src/thermalCam/RecordedThermal.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalCam/RecordedThermal.cpp.s
 .PHONY : src/thermalCam/RecordedThermal.cpp.s
 
+src/thermalCam/ThermalCamera.o: src/thermalCam/ThermalCamera.cpp.o
+.PHONY : src/thermalCam/ThermalCamera.o
+
+# target to build an object file
+src/thermalCam/ThermalCamera.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.o
+.PHONY : src/thermalCam/ThermalCamera.cpp.o
+
+src/thermalCam/ThermalCamera.i: src/thermalCam/ThermalCamera.cpp.i
+.PHONY : src/thermalCam/ThermalCamera.i
+
+# target to preprocess a source file
+src/thermalCam/ThermalCamera.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.i
+.PHONY : src/thermalCam/ThermalCamera.cpp.i
+
+src/thermalCam/ThermalCamera.s: src/thermalCam/ThermalCamera.cpp.s
+.PHONY : src/thermalCam/ThermalCamera.s
+
+# target to generate assembly for a file
+src/thermalCam/ThermalCamera.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.s
+.PHONY : src/thermalCam/ThermalCamera.cpp.s
+
 src/thermalCam/fakeThermalCamera.o: src/thermalCam/fakeThermalCamera.cpp.o
 .PHONY : src/thermalCam/fakeThermalCamera.o
 
@@ -426,6 +450,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... main"
+	@echo "... src/GUI.o"
+	@echo "... src/GUI.i"
+	@echo "... src/GUI.s"
 	@echo "... src/camera/IPWebcamCamera.o"
 	@echo "... src/camera/IPWebcamCamera.i"
 	@echo "... src/camera/IPWebcamCamera.s"
@@ -435,9 +462,6 @@ help:
 	@echo "... src/camera/WebcamCamera.o"
 	@echo "... src/camera/WebcamCamera.i"
 	@echo "... src/camera/WebcamCamera.s"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
 	@echo "... src/processing/ChessboardCalibration.o"
 	@echo "... src/processing/ChessboardCalibration.i"
 	@echo "... src/processing/ChessboardCalibration.s"
@@ -456,6 +480,9 @@ help:
 	@echo "... src/thermalCam/RecordedThermal.o"
 	@echo "... src/thermalCam/RecordedThermal.i"
 	@echo "... src/thermalCam/RecordedThermal.s"
+	@echo "... src/thermalCam/ThermalCamera.o"
+	@echo "... src/thermalCam/ThermalCamera.i"
+	@echo "... src/thermalCam/ThermalCamera.s"
 	@echo "... src/thermalCam/fakeThermalCamera.o"
 	@echo "... src/thermalCam/fakeThermalCamera.i"
 	@echo "... src/thermalCam/fakeThermalCamera.s"

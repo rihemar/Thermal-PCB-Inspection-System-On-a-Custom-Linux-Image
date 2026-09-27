@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/g++
 CXX_DEFINES = -DDEVICE_UBUNTU
 
-CXX_INCLUDES = -I/home/rihemar/FAC/Stage_LAB619/include/camera -I/home/rihemar/FAC/Stage_LAB619/include/thermalCam -I/home/rihemar/FAC/Stage_LAB619/include/processing -I/home/rihemar/FAC/Stage_LAB619/include/drivers -isystem /usr/include/opencv4
+CXX_INCLUDES = -I/home/rihemar/FAC/Stage_LAB619/include/camera -I/home/rihemar/FAC/Stage_LAB619/include/thermalCam -I/home/rihemar/FAC/Stage_LAB619/include/processing -I/home/rihemar/FAC/Stage_LAB619/include/drivers/MLX90641 -isystem /usr/include/opencv4
 
 CXX_FLAGS = -g -std=gnu++17
 
