@@ -2,7 +2,7 @@ fake_thermal_heatmap.png
 pictures/
 build/
 outputs/
-
+.vscode/
 # Ignore files in the root directory only
 /*.*
 
