@@ -1,12 +1,8 @@
 # Thermal Inspector
 
-RGB + thermal fusion for PCB inspection. Two executables are built from the same
-core library:
-
-| Target | Source          | What it is                                                     |
-|--------|-----------------|----------------------------------------------------------------|
-| `main` | `src/main.cpp`  | Command-line driven app: mode, RGB source, thermal source, display options |
-| `gui`  | `src/GUI.cpp`   | Original interactive GUI (menu only, PC webcam + fake thermal)  |
+RGB + thermal fusion for PCB inspection. One executable, `main`, built from
+`src/main.cpp` on top of the `thermal_core` library (cameras, thermal sources,
+processing).
 
 Pipeline in live mode:
 
@@ -50,7 +46,6 @@ Stage_LAB619/
 │   └── drivers/MLX90641/
 └── src/
     ├── main.cpp
-    ├── GUI.cpp
     ├── camera/ … thermalCam/ … processing/ … drivers/MLX90641/ …
 ```
 
@@ -61,8 +56,8 @@ cmake -B build -DDEVICE=UBUNTU
 cmake --build build -j
 ```
 
-Produces `build/main` and `build/gui`. The real MLX90641 sensor is **not** compiled
-in this configuration; `main -T real` prints an error and exits.
+Produces `build/main`. The real MLX90641 sensor is **not** compiled in this
+configuration; `main -T real` prints an error and exits.
 
 ### Raspberry Pi
 
