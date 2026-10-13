@@ -1,5 +1,12 @@
 fake_thermal_heatmap.png
-.gitignore
 pictures/
 build/
 outputs/
+
+# Ignore files in the root directory only
+/*.*
+
+# Keep these files
+!/CMakeLists.txt
+!/.gitignore
+!/README.md
