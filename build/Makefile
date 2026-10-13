@@ -117,6 +117,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named thermal_core
+
+# Build rule for target.
+thermal_core: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 thermal_core
+.PHONY : thermal_core
+
+# fast build rule for target.
+thermal_core/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/build
+.PHONY : thermal_core/fast
+
+#=============================================================================
 # Target rules for targets named main
 
 # Build rule for target.
@@ -129,12 +142,25 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
+#=============================================================================
+# Target rules for targets named gui
+
+# Build rule for target.
+gui: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gui
+.PHONY : gui
+
+# fast build rule for target.
+gui/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/build
+.PHONY : gui/fast
+
 src/GUI.o: src/GUI.cpp.o
 .PHONY : src/GUI.o
 
 # target to build an object file
 src/GUI.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GUI.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/GUI.cpp.o
 .PHONY : src/GUI.cpp.o
 
 src/GUI.i: src/GUI.cpp.i
@@ -142,7 +168,7 @@ src/GUI.i: src/GUI.cpp.i
 
 # target to preprocess a source file
 src/GUI.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GUI.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/GUI.cpp.i
 .PHONY : src/GUI.cpp.i
 
 src/GUI.s: src/GUI.cpp.s
@@ -150,7 +176,7 @@ src/GUI.s: src/GUI.cpp.s
 
 # target to generate assembly for a file
 src/GUI.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GUI.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/src/GUI.cpp.s
 .PHONY : src/GUI.cpp.s
 
 src/camera/IPWebcamCamera.o: src/camera/IPWebcamCamera.cpp.o
@@ -158,7 +184,7 @@ src/camera/IPWebcamCamera.o: src/camera/IPWebcamCamera.cpp.o
 
 # target to build an object file
 src/camera/IPWebcamCamera.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/camera/IPWebcamCamera.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/camera/IPWebcamCamera.cpp.o
 .PHONY : src/camera/IPWebcamCamera.cpp.o
 
 src/camera/IPWebcamCamera.i: src/camera/IPWebcamCamera.cpp.i
@@ -166,7 +192,7 @@ src/camera/IPWebcamCamera.i: src/camera/IPWebcamCamera.cpp.i
 
 # target to preprocess a source file
 src/camera/IPWebcamCamera.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/camera/IPWebcamCamera.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/camera/IPWebcamCamera.cpp.i
 .PHONY : src/camera/IPWebcamCamera.cpp.i
 
 src/camera/IPWebcamCamera.s: src/camera/IPWebcamCamera.cpp.s
@@ -174,7 +200,7 @@ src/camera/IPWebcamCamera.s: src/camera/IPWebcamCamera.cpp.s
 
 # target to generate assembly for a file
 src/camera/IPWebcamCamera.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/camera/IPWebcamCamera.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/camera/IPWebcamCamera.cpp.s
 .PHONY : src/camera/IPWebcamCamera.cpp.s
 
 src/camera/RecordedRGB.o: src/camera/RecordedRGB.cpp.o
@@ -182,7 +208,7 @@ src/camera/RecordedRGB.o: src/camera/RecordedRGB.cpp.o
 
 # target to build an object file
 src/camera/RecordedRGB.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/camera/RecordedRGB.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/camera/RecordedRGB.cpp.o
 .PHONY : src/camera/RecordedRGB.cpp.o
 
 src/camera/RecordedRGB.i: src/camera/RecordedRGB.cpp.i
@@ -190,7 +216,7 @@ src/camera/RecordedRGB.i: src/camera/RecordedRGB.cpp.i
 
 # target to preprocess a source file
 src/camera/RecordedRGB.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/camera/RecordedRGB.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/camera/RecordedRGB.cpp.i
 .PHONY : src/camera/RecordedRGB.cpp.i
 
 src/camera/RecordedRGB.s: src/camera/RecordedRGB.cpp.s
@@ -198,7 +224,7 @@ src/camera/RecordedRGB.s: src/camera/RecordedRGB.cpp.s
 
 # target to generate assembly for a file
 src/camera/RecordedRGB.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/camera/RecordedRGB.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/camera/RecordedRGB.cpp.s
 .PHONY : src/camera/RecordedRGB.cpp.s
 
 src/camera/WebcamCamera.o: src/camera/WebcamCamera.cpp.o
@@ -206,7 +232,7 @@ src/camera/WebcamCamera.o: src/camera/WebcamCamera.cpp.o
 
 # target to build an object file
 src/camera/WebcamCamera.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/camera/WebcamCamera.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/camera/WebcamCamera.cpp.o
 .PHONY : src/camera/WebcamCamera.cpp.o
 
 src/camera/WebcamCamera.i: src/camera/WebcamCamera.cpp.i
@@ -214,7 +240,7 @@ src/camera/WebcamCamera.i: src/camera/WebcamCamera.cpp.i
 
 # target to preprocess a source file
 src/camera/WebcamCamera.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/camera/WebcamCamera.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/camera/WebcamCamera.cpp.i
 .PHONY : src/camera/WebcamCamera.cpp.i
 
 src/camera/WebcamCamera.s: src/camera/WebcamCamera.cpp.s
@@ -222,15 +248,39 @@ src/camera/WebcamCamera.s: src/camera/WebcamCamera.cpp.s
 
 # target to generate assembly for a file
 src/camera/WebcamCamera.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/camera/WebcamCamera.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/camera/WebcamCamera.cpp.s
 .PHONY : src/camera/WebcamCamera.cpp.s
+
+src/main.o: src/main.cpp.o
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
+
+src/main.i: src/main.cpp.i
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 src/processing/ChessboardCalibration.o: src/processing/ChessboardCalibration.cpp.o
 .PHONY : src/processing/ChessboardCalibration.o
 
 # target to build an object file
 src/processing/ChessboardCalibration.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/processing/ChessboardCalibration.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/processing/ChessboardCalibration.cpp.o
 .PHONY : src/processing/ChessboardCalibration.cpp.o
 
 src/processing/ChessboardCalibration.i: src/processing/ChessboardCalibration.cpp.i
@@ -238,7 +288,7 @@ src/processing/ChessboardCalibration.i: src/processing/ChessboardCalibration.cpp
 
 # target to preprocess a source file
 src/processing/ChessboardCalibration.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/processing/ChessboardCalibration.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/processing/ChessboardCalibration.cpp.i
 .PHONY : src/processing/ChessboardCalibration.cpp.i
 
 src/processing/ChessboardCalibration.s: src/processing/ChessboardCalibration.cpp.s
@@ -246,7 +296,7 @@ src/processing/ChessboardCalibration.s: src/processing/ChessboardCalibration.cpp
 
 # target to generate assembly for a file
 src/processing/ChessboardCalibration.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/processing/ChessboardCalibration.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/processing/ChessboardCalibration.cpp.s
 .PHONY : src/processing/ChessboardCalibration.cpp.s
 
 src/processing/HotspotDetector.o: src/processing/HotspotDetector.cpp.o
@@ -254,7 +304,7 @@ src/processing/HotspotDetector.o: src/processing/HotspotDetector.cpp.o
 
 # target to build an object file
 src/processing/HotspotDetector.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/processing/HotspotDetector.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/processing/HotspotDetector.cpp.o
 .PHONY : src/processing/HotspotDetector.cpp.o
 
 src/processing/HotspotDetector.i: src/processing/HotspotDetector.cpp.i
@@ -262,7 +312,7 @@ src/processing/HotspotDetector.i: src/processing/HotspotDetector.cpp.i
 
 # target to preprocess a source file
 src/processing/HotspotDetector.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/processing/HotspotDetector.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/processing/HotspotDetector.cpp.i
 .PHONY : src/processing/HotspotDetector.cpp.i
 
 src/processing/HotspotDetector.s: src/processing/HotspotDetector.cpp.s
@@ -270,7 +320,7 @@ src/processing/HotspotDetector.s: src/processing/HotspotDetector.cpp.s
 
 # target to generate assembly for a file
 src/processing/HotspotDetector.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/processing/HotspotDetector.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/processing/HotspotDetector.cpp.s
 .PHONY : src/processing/HotspotDetector.cpp.s
 
 src/processing/JointBilateralUpsample.o: src/processing/JointBilateralUpsample.cpp.o
@@ -278,7 +328,7 @@ src/processing/JointBilateralUpsample.o: src/processing/JointBilateralUpsample.c
 
 # target to build an object file
 src/processing/JointBilateralUpsample.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/processing/JointBilateralUpsample.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/processing/JointBilateralUpsample.cpp.o
 .PHONY : src/processing/JointBilateralUpsample.cpp.o
 
 src/processing/JointBilateralUpsample.i: src/processing/JointBilateralUpsample.cpp.i
@@ -286,7 +336,7 @@ src/processing/JointBilateralUpsample.i: src/processing/JointBilateralUpsample.c
 
 # target to preprocess a source file
 src/processing/JointBilateralUpsample.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/processing/JointBilateralUpsample.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/processing/JointBilateralUpsample.cpp.i
 .PHONY : src/processing/JointBilateralUpsample.cpp.i
 
 src/processing/JointBilateralUpsample.s: src/processing/JointBilateralUpsample.cpp.s
@@ -294,7 +344,7 @@ src/processing/JointBilateralUpsample.s: src/processing/JointBilateralUpsample.c
 
 # target to generate assembly for a file
 src/processing/JointBilateralUpsample.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/processing/JointBilateralUpsample.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/processing/JointBilateralUpsample.cpp.s
 .PHONY : src/processing/JointBilateralUpsample.cpp.s
 
 src/processing/PCBDetector.o: src/processing/PCBDetector.cpp.o
@@ -302,7 +352,7 @@ src/processing/PCBDetector.o: src/processing/PCBDetector.cpp.o
 
 # target to build an object file
 src/processing/PCBDetector.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/processing/PCBDetector.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/processing/PCBDetector.cpp.o
 .PHONY : src/processing/PCBDetector.cpp.o
 
 src/processing/PCBDetector.i: src/processing/PCBDetector.cpp.i
@@ -310,7 +360,7 @@ src/processing/PCBDetector.i: src/processing/PCBDetector.cpp.i
 
 # target to preprocess a source file
 src/processing/PCBDetector.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/processing/PCBDetector.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/processing/PCBDetector.cpp.i
 .PHONY : src/processing/PCBDetector.cpp.i
 
 src/processing/PCBDetector.s: src/processing/PCBDetector.cpp.s
@@ -318,7 +368,7 @@ src/processing/PCBDetector.s: src/processing/PCBDetector.cpp.s
 
 # target to generate assembly for a file
 src/processing/PCBDetector.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/processing/PCBDetector.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/processing/PCBDetector.cpp.s
 .PHONY : src/processing/PCBDetector.cpp.s
 
 src/processing/Registration.o: src/processing/Registration.cpp.o
@@ -326,7 +376,7 @@ src/processing/Registration.o: src/processing/Registration.cpp.o
 
 # target to build an object file
 src/processing/Registration.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/processing/Registration.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/processing/Registration.cpp.o
 .PHONY : src/processing/Registration.cpp.o
 
 src/processing/Registration.i: src/processing/Registration.cpp.i
@@ -334,7 +384,7 @@ src/processing/Registration.i: src/processing/Registration.cpp.i
 
 # target to preprocess a source file
 src/processing/Registration.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/processing/Registration.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/processing/Registration.cpp.i
 .PHONY : src/processing/Registration.cpp.i
 
 src/processing/Registration.s: src/processing/Registration.cpp.s
@@ -342,7 +392,7 @@ src/processing/Registration.s: src/processing/Registration.cpp.s
 
 # target to generate assembly for a file
 src/processing/Registration.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/processing/Registration.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/processing/Registration.cpp.s
 .PHONY : src/processing/Registration.cpp.s
 
 src/thermalCam/RecordedThermal.o: src/thermalCam/RecordedThermal.cpp.o
@@ -350,7 +400,7 @@ src/thermalCam/RecordedThermal.o: src/thermalCam/RecordedThermal.cpp.o
 
 # target to build an object file
 src/thermalCam/RecordedThermal.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalCam/RecordedThermal.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/thermalCam/RecordedThermal.cpp.o
 .PHONY : src/thermalCam/RecordedThermal.cpp.o
 
 src/thermalCam/RecordedThermal.i: src/thermalCam/RecordedThermal.cpp.i
@@ -358,7 +408,7 @@ src/thermalCam/RecordedThermal.i: src/thermalCam/RecordedThermal.cpp.i
 
 # target to preprocess a source file
 src/thermalCam/RecordedThermal.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalCam/RecordedThermal.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/thermalCam/RecordedThermal.cpp.i
 .PHONY : src/thermalCam/RecordedThermal.cpp.i
 
 src/thermalCam/RecordedThermal.s: src/thermalCam/RecordedThermal.cpp.s
@@ -366,39 +416,15 @@ src/thermalCam/RecordedThermal.s: src/thermalCam/RecordedThermal.cpp.s
 
 # target to generate assembly for a file
 src/thermalCam/RecordedThermal.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalCam/RecordedThermal.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/thermalCam/RecordedThermal.cpp.s
 .PHONY : src/thermalCam/RecordedThermal.cpp.s
-
-src/thermalCam/ThermalCamera.o: src/thermalCam/ThermalCamera.cpp.o
-.PHONY : src/thermalCam/ThermalCamera.o
-
-# target to build an object file
-src/thermalCam/ThermalCamera.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.o
-.PHONY : src/thermalCam/ThermalCamera.cpp.o
-
-src/thermalCam/ThermalCamera.i: src/thermalCam/ThermalCamera.cpp.i
-.PHONY : src/thermalCam/ThermalCamera.i
-
-# target to preprocess a source file
-src/thermalCam/ThermalCamera.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.i
-.PHONY : src/thermalCam/ThermalCamera.cpp.i
-
-src/thermalCam/ThermalCamera.s: src/thermalCam/ThermalCamera.cpp.s
-.PHONY : src/thermalCam/ThermalCamera.s
-
-# target to generate assembly for a file
-src/thermalCam/ThermalCamera.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalCam/ThermalCamera.cpp.s
-.PHONY : src/thermalCam/ThermalCamera.cpp.s
 
 src/thermalCam/fakeThermalCamera.o: src/thermalCam/fakeThermalCamera.cpp.o
 .PHONY : src/thermalCam/fakeThermalCamera.o
 
 # target to build an object file
 src/thermalCam/fakeThermalCamera.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalCam/fakeThermalCamera.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/thermalCam/fakeThermalCamera.cpp.o
 .PHONY : src/thermalCam/fakeThermalCamera.cpp.o
 
 src/thermalCam/fakeThermalCamera.i: src/thermalCam/fakeThermalCamera.cpp.i
@@ -406,7 +432,7 @@ src/thermalCam/fakeThermalCamera.i: src/thermalCam/fakeThermalCamera.cpp.i
 
 # target to preprocess a source file
 src/thermalCam/fakeThermalCamera.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalCam/fakeThermalCamera.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/thermalCam/fakeThermalCamera.cpp.i
 .PHONY : src/thermalCam/fakeThermalCamera.cpp.i
 
 src/thermalCam/fakeThermalCamera.s: src/thermalCam/fakeThermalCamera.cpp.s
@@ -414,7 +440,7 @@ src/thermalCam/fakeThermalCamera.s: src/thermalCam/fakeThermalCamera.cpp.s
 
 # target to generate assembly for a file
 src/thermalCam/fakeThermalCamera.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalCam/fakeThermalCamera.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/thermalCam/fakeThermalCamera.cpp.s
 .PHONY : src/thermalCam/fakeThermalCamera.cpp.s
 
 src/thermalCam/generateFakeHeatmapFromImage.o: src/thermalCam/generateFakeHeatmapFromImage.cpp.o
@@ -422,7 +448,7 @@ src/thermalCam/generateFakeHeatmapFromImage.o: src/thermalCam/generateFakeHeatma
 
 # target to build an object file
 src/thermalCam/generateFakeHeatmapFromImage.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalCam/generateFakeHeatmapFromImage.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/thermalCam/generateFakeHeatmapFromImage.cpp.o
 .PHONY : src/thermalCam/generateFakeHeatmapFromImage.cpp.o
 
 src/thermalCam/generateFakeHeatmapFromImage.i: src/thermalCam/generateFakeHeatmapFromImage.cpp.i
@@ -430,7 +456,7 @@ src/thermalCam/generateFakeHeatmapFromImage.i: src/thermalCam/generateFakeHeatma
 
 # target to preprocess a source file
 src/thermalCam/generateFakeHeatmapFromImage.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalCam/generateFakeHeatmapFromImage.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/thermalCam/generateFakeHeatmapFromImage.cpp.i
 .PHONY : src/thermalCam/generateFakeHeatmapFromImage.cpp.i
 
 src/thermalCam/generateFakeHeatmapFromImage.s: src/thermalCam/generateFakeHeatmapFromImage.cpp.s
@@ -438,7 +464,7 @@ src/thermalCam/generateFakeHeatmapFromImage.s: src/thermalCam/generateFakeHeatma
 
 # target to generate assembly for a file
 src/thermalCam/generateFakeHeatmapFromImage.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/thermalCam/generateFakeHeatmapFromImage.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/thermal_core.dir/build.make CMakeFiles/thermal_core.dir/src/thermalCam/generateFakeHeatmapFromImage.cpp.s
 .PHONY : src/thermalCam/generateFakeHeatmapFromImage.cpp.s
 
 # Help Target
@@ -449,7 +475,9 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... gui"
 	@echo "... main"
+	@echo "... thermal_core"
 	@echo "... src/GUI.o"
 	@echo "... src/GUI.i"
 	@echo "... src/GUI.s"
@@ -462,6 +490,9 @@ help:
 	@echo "... src/camera/WebcamCamera.o"
 	@echo "... src/camera/WebcamCamera.i"
 	@echo "... src/camera/WebcamCamera.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 	@echo "... src/processing/ChessboardCalibration.o"
 	@echo "... src/processing/ChessboardCalibration.i"
 	@echo "... src/processing/ChessboardCalibration.s"
@@ -480,9 +511,6 @@ help:
 	@echo "... src/thermalCam/RecordedThermal.o"
 	@echo "... src/thermalCam/RecordedThermal.i"
 	@echo "... src/thermalCam/RecordedThermal.s"
-	@echo "... src/thermalCam/ThermalCamera.o"
-	@echo "... src/thermalCam/ThermalCamera.i"
-	@echo "... src/thermalCam/ThermalCamera.s"
 	@echo "... src/thermalCam/fakeThermalCamera.o"
 	@echo "... src/thermalCam/fakeThermalCamera.i"
 	@echo "... src/thermalCam/fakeThermalCamera.s"

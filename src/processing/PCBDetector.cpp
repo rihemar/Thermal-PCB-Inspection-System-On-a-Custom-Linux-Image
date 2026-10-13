@@ -28,7 +28,7 @@ cv::Mat PCBDetector::ToGrayscale(const cv::Mat& rgbImage) const {
         cv::GaussianBlur(gray, blurred, cv::Size(5, 5), 0);
         // utils::show("blur",blurred);
         cv::Canny(blurred, edges, lowThresh, highThresh);
-        utils::show("canny",edges);
+        // utils::show("canny",edges);
         return edges;
     }
 
