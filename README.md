@@ -86,16 +86,7 @@ rm -rf build
 cmake -B build -DDEVICE=RASPBERRY_PI
 cmake --build build -j
 ```
-
-### Common build problems
-
-| Symptom | Cause / fix |
-|---------|-------------|
-| `undefined reference to ThermalCamera::ThermalCamera` | Built with `DEVICE=UBUNTU` but `main.cpp` is an old version without the `#ifdef DEVICE_RASPBERRY_PI` guard. Use the current `main.cpp`, or configure with `-DDEVICE=RASPBERRY_PI` on the Pi. |
-| `redefinition of 'struct AppOptions'` (or any name from `main.cpp`) in a header | A header (e.g. `PCBDetector.hpp`) was overwritten with `main.cpp`'s contents. Restore the header from git. |
-| `cannot find -lbcm2835` | Run `cmake --build build --target bcm` once on the Pi. |
-
----
+--- 
 
 ## 2. Running `main`
 
