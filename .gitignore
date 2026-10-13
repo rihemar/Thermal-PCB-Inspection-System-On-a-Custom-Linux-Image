@@ -3,6 +3,7 @@ pictures/
 build/
 outputs/
 .vscode/
+tests/
 # Ignore files in the root directory only
 /*.*
 
